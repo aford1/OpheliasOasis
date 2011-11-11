@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ophelia's Oasis</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <link type="text/css" href="css2/redmond/jquery-ui-1.8.16.custom.css" rel="Stylesheet" />
+        <script type="text/javascript" src="jquery/jquery-1.6.2.min.js"></script>
+        <script type="text/javascript" src="jquery/jquery-ui-1.8.16.custom.min.js"></script>
+        <script type="text/javascript">
+            
+            $(function() {
+                //Date pickers for the arrival date and departure date
+                $( "#arrivalDate, #departureDate" ).datepicker();
+                
+                var d = new Date;           
+                //Variables for the date
+                var month = d.getMonth()+1;
+                var day = parseInt(d.getDate());
+                var nextDay = day+1;
+                var year = d.getFullYear();
+                $("#arrivalDate").val(month+"/"+day+"/"+year);
+                $("#departureDate").val(month+"/"+nextDay+"/"+year);
+                
+                $("#searchButton").click(function(){
+                    alert("searching for rooms from: "+$("#arrivalDate").attr("value")+" to: "+$("#departureDate").attr("value"));
+                });
+            })
+        </script>
+    </head>
+    <body>
+
+        <div id="container">
+            <div id="logo">
+                <h1>Ophelia's Oasis</h1>
+            </div>
+            <ul id="nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html"">News</a></li>
+                <li><a href="index.html"">Contact</a></li>
+                <li><a href="index.html"">About</a></li>
+            </ul>
+            <div id="spacer"></div>
+            <div id ="formContainer">
+                <form>
+                    <fieldset>
+                        <h2>Check Availability</h2>
+                        <table>
+                            <tr>
+                                <td><label >Arrival Date</label></td>
+                                <td><input type="text" id="arrivalDate" value=""  autocomplete ="OFF" size="10"/></td>                          
+                            </tr>                           
+                            <tr>
+                                <td><label >Departure Date</label></td>
+                                <td><input type="text"  id="departureDate" value="" autocomplete ="OFF" size="10" /></td>
+                            </tr>
+                            <tr>
+                                <td><label >Rooms</label></td>
+                                <td>
+                                    <select id="rooms">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </table>
+
+                        <button id="searchButton">Search</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
