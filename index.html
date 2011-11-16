@@ -24,9 +24,30 @@
                 $("#departureDate").val(month+"/"+nextDay+"/"+year);
                 
                 $("#searchButton").click(function(){
-                    alert("searching for rooms from: "+$("#arrivalDate").attr("value")+" to: "+$("#departureDate").attr("value"));
+                    alert($("#arrivalDate").attr("value")+"\n"+$("#departureDate").attr("value")+"\n"+$("#rooms").attr("value"));
+                    $.ajax({
+                        url: "checkAvailability.php",
+                        type: "GET",
+                        data: "arrivalDate="+$("#arrivalDate").attr("value")+
+                            "&departureDate="+$("#departureDate").attr("value")+
+                            "&rooms="+$("#rooms").attr("value"),               
+                        success: function(result){
+                            if(result){
+                                alert(result);
+                                $("#searchResult").html(result);
+                            }
+                            else
+                                alert("Error submitting form");                              
+                        }
+                    }); 
+                    
                 });
-            })
+                
+            });
+            
+            function checkAvailability(){
+                
+            }
         </script>
     </head>
     <body>
@@ -43,22 +64,22 @@
             </ul>
             <div id="spacer"></div>
             <div id ="formContainer">
-                <form>
+                <form id="checkAvailability" >
                     <fieldset>
                         <h2>Check Availability</h2>
                         <table>
                             <tr>
                                 <td><label >Arrival Date</label></td>
-                                <td><input type="text" id="arrivalDate" value=""  autocomplete ="OFF" size="10"/></td>                          
+                                <td><input name="arrivalDate" type="text" id="arrivalDate" value=""  autocomplete ="OFF" size="10"/></td>                          
                             </tr>                           
                             <tr>
                                 <td><label >Departure Date</label></td>
-                                <td><input type="text"  id="departureDate" value="" autocomplete ="OFF" size="10" /></td>
+                                <td><input name="departureDate" type="text"  id="departureDate" value="" autocomplete ="OFF" size="10" /></td>
                             </tr>
                             <tr>
                                 <td><label >Rooms</label></td>
                                 <td>
-                                    <select id="rooms">
+                                    <select id="rooms" name="rooms">
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -73,10 +94,14 @@
                             </tr>
                         </table>
 
-                        <button id="searchButton">Search</button>
+                        <input type="button" id="searchButton" value="Search">
                     </fieldset>
                 </form>
             </div>
+            <div id="searchResult">
+
+            </div>
         </div>
+
     </body>
 </html>

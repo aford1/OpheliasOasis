@@ -50,7 +50,7 @@ $_SESSION['failedAttempt'] = FALSE;
                             </tr>                           
                             <tr>
                                 <td><label >Password</label></td>
-                                <td><input name="password" type="text"  id="password" value="" autocomplete ="OFF" size="10" /></td>
+                                <td><input name="password" type="password"  id="password" value="" autocomplete ="OFF" size="10" /></td>
                             </tr>                         
                         </table>
 

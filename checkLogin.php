@@ -17,7 +17,6 @@ $mypassword = stripslashes($mypassword);
 $myusername = mysql_real_escape_string($myusername);
 $mypassword = mysql_real_escape_string($mypassword);
 
-$mypassword = "password";
 
 $sql = "SELECT * FROM Employee  where username = '$myusername' AND password = '$mypassword';";
 $result = mysql_query($sql);
