@@ -25,10 +25,11 @@ root {
 #formContainer {
     padding-left: 50px;
     width: 350px;
+    margin-bottom: 50px;
 }
 #container {
     width: 700px;
-    height: 800px;
+ min-height: 700px;
     margin-left:auto;
     margin-right:auto;
     background-color: white;
@@ -72,4 +73,9 @@ body {
 #failedLogin{
     color: red;
     padding-left: 50px;
+}
+
+#searchResult{
+    margin-left: 50px;
+    margin-bottom: 50px;
 }

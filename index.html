@@ -24,7 +24,7 @@
                 $("#departureDate").val(month+"/"+nextDay+"/"+year);
                 
                 $("#searchButton").click(function(){
-                    alert($("#arrivalDate").attr("value")+"\n"+$("#departureDate").attr("value")+"\n"+$("#rooms").attr("value"));
+                    //alert($("#arrivalDate").attr("value")+"\n"+$("#departureDate").attr("value")+"\n"+$("#rooms").attr("value"));
                     $.ajax({
                         url: "checkAvailability.php",
                         type: "GET",
@@ -33,7 +33,7 @@
                             "&rooms="+$("#rooms").attr("value"),               
                         success: function(result){
                             if(result){
-                                alert(result);
+                                //alert(result);
                                 $("#searchResult").html(result);
                             }
                             else
