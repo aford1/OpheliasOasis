@@ -35,18 +35,20 @@
                             if(result){
                                 //alert(result);
                                 $("#searchResult").html(result);
+                                $("#reserveButton").click(function(){
+                                    reserveRoom();
+                                })
                             }
                             else
                                 alert("Error submitting form");                              
                         }
-                    }); 
-                    
-                });
-                
+                    });                  
+                });             
             });
             
-            function checkAvailability(){
-                
+            function reserveRoom(){
+                //alert("reserving room");
+                location.href="reserveRoom.php";
             }
         </script>
     </head>

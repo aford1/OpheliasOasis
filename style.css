@@ -29,7 +29,7 @@ root {
 }
 #container {
     width: 700px;
- min-height: 700px;
+ min-height: 750px;
     margin-left:auto;
     margin-right:auto;
     background-color: white;
@@ -76,6 +76,64 @@ body {
 }
 
 #searchResult{
-    margin-left: 50px;
+
     margin-bottom: 50px;
+}
+
+
+table.room_info {
+width: 100%;
+border-collapse: collapse;
+border: 1px solid #AAA;
+}
+
+.room_info > thead th {
+background: #CCC;
+vertical-align: middle;
+font-weight: bold;
+padding: .25em 0;
+}
+
+.room_info > tbody {
+height: 115px;
+}
+
+.room_info td.room_desc {
+background-position: 0 100%;
+}
+.room_info td {
+vertical-align: top;
+}
+.room_info td.availability {
+width: 80px;
+background-position: 50% 100%;
+}
+.room_info > tbody > tr > td {
+padding-top: 5px;
+}
+.room_info td.price {
+width: 190px;
+background-position: 100% 100%;
+}
+
+.room_info .pricing_wrapper {
+height: 7.3em;
+padding: 0 0 2em;
+position: relative;
+}
+
+.total {
+font-weight: bold;
+color: #C00;
+}
+
+
+.reserveButton {
+   background-color: red;
+   color: white;
+   font-weight: bold;
+}
+ 
+#reserveForm {
+    margin-left: 50px;
 }

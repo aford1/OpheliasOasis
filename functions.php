@@ -43,6 +43,16 @@ function findAvailableRoom($arrivalDate, $departureDate) {
     return $freeRooms;
 }
 
+function getBaseRate ($roomID){
+    $sql = "SELECT baseRate
+                FROM Room
+                WHERE roomID = '$roomID';";
+    $result = mysql_query($sql);
+    mysql_close($con);
+    $row = mysql_fetch_array($result);
+    return $row['baseRate'];
+}
+
 //Convert a date from mm/dd/yyyy  to yyyy-mm-dd
 function convertDate($date) {
     $month = substr($date, 0, 2);
@@ -50,6 +60,37 @@ function convertDate($date) {
     $year = substr($date, 6, 4);
     $date = $year . "-" . $month . "-" . $day;
     return $date;
+}
+
+function printReservationInfo($reservationID){
+    
+    //Get the reservation information for the requested id
+    $reservationInfo = "SELECT * from Reservation WHERE reservationID = '$reservationID';";
+    
+    $result = mysql_query($reservationInfo);
+    mysql_close($con);
+    $row = mysql_fetch_array($result);
+    return "
+    <table>
+        <tr>
+            <td>Reservation ID:</td><td>".$row['reservationID']."</td>
+        </tr>
+        <tr>
+            <td>First Name:</td><td>".$row['firstName']."</td>
+        </tr>
+        <tr>
+            <td>Last Name:</td><td>".$row['lastName']."</td>
+        </tr>
+        <tr>
+            <td>Arrival Date:</td><td>".$row['arrivingDate']."</td>
+        </tr>
+        <tr>
+            <td>Departure Date: </td><td>".$row['departureDate']."</td>
+        </tr>
+        <tr> <td></td></tr>
+    </table>
+
+";
 }
 
 ?>
