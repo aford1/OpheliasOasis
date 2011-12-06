@@ -10,18 +10,22 @@
         <script type="text/javascript" src="jquery/jquery-ui-1.8.16.custom.min.js"></script>
         <script type="text/javascript">
             
+            var d = new Date;           
+            //Variables for the date
+            var month = d.getMonth()+1;
+            var day = d.getDate();
+            var nextDay = day+1;
+            var year = d.getFullYear();
+            var currentDate = month+"/"+day+"/"+year;
+            var nextDay = month+"/"+nextDay+"/"+year;
+            
             $(function() {
                 //Date pickers for the arrival date and departure date
                 $( "#arrivalDate, #departureDate" ).datepicker();
                 
-                var d = new Date;           
-                //Variables for the date
-                var month = d.getMonth()+1;
-                var day = parseInt(d.getDate());
-                var nextDay = day+1;
-                var year = d.getFullYear();
-                $("#arrivalDate").val(month+"/"+day+"/"+year);
-                $("#departureDate").val(month+"/"+nextDay+"/"+year);
+                
+                $("#arrivalDate").val(currentDate);
+                $("#departureDate").val(nextDay);
                 
                 $("#searchButton").click(function(){
                     //alert($("#arrivalDate").attr("value")+"\n"+$("#departureDate").attr("value")+"\n"+$("#rooms").attr("value"));
@@ -30,7 +34,8 @@
                         type: "GET",
                         data: "arrivalDate="+$("#arrivalDate").attr("value")+
                             "&departureDate="+$("#departureDate").attr("value")+
-                            "&rooms="+$("#rooms").attr("value"),               
+                            "&rooms="+$("#rooms").attr("value")+
+                            "&currentDate="+currentDate,
                         success: function(result){
                             if(result){
                                 //alert(result);
@@ -38,18 +43,29 @@
                                 $("#reserveButton").click(function(){
                                     reserveRoom();
                                 })
+                                $("#special60Button").click(function(){
+                                    reserve60Special()       
+                                })
                             }
                             else
                                 alert("Error submitting form");                              
                         }
                     });                  
-                });             
+                });     
             });
             
             function reserveRoom(){
                 //alert("reserving room");
                 location.href="reserveRoom.php";
             }
+            
+            function reserve60Special() {
+               
+        }
+            
+           
+            
+            
         </script>
     </head>
     <body>
@@ -67,37 +83,53 @@
             <div id="spacer"></div>
             <div id ="formContainer">
                 <form id="checkAvailability" >
-                    <fieldset>
-                        <h2>Check Availability</h2>
-                        <table>
-                            <tr>
-                                <td><label >Arrival Date</label></td>
-                                <td><input name="arrivalDate" type="text" id="arrivalDate" value=""  autocomplete ="OFF" size="10"/></td>                          
-                            </tr>                           
-                            <tr>
-                                <td><label >Departure Date</label></td>
-                                <td><input name="departureDate" type="text"  id="departureDate" value="" autocomplete ="OFF" size="10" /></td>
-                            </tr>
-                            <tr>
-                                <td><label >Rooms</label></td>
-                                <td>
-                                    <select id="rooms" name="rooms">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                        <option>6</option>
-                                        <option>7</option>
-                                        <option>8</option>
-                                    </select>
-                                </td>
-                                <td></td>
-                            </tr>
-                        </table>
 
-                        <input type="button" id="searchButton" value="Search">
-                    </fieldset>
+                    <h2>Check Availability</h2>
+                    <table>
+                        <tr>
+                            <td><label >Check In</label></td>
+                            <td><input name="arrivalDate" type="text" id="arrivalDate" value=""  autocomplete ="OFF" size="10"/></td>                          
+                        </tr>                           
+                        <tr>
+                            <td><label >Check Out</label></td>
+                            <td><input name="departureDate" type="text"  id="departureDate" value="" autocomplete ="OFF" size="10" /></td>
+                        </tr>
+                        <tr>
+                            <td><label >Rooms</label></td>
+                            <td>
+                                <select id="rooms" name="rooms">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                </select>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+
+                    <input type="button" id="searchButton" value="FIND ROOMS" class="blueButton">
+
+                </form>
+            </div>
+            <div id="findReservation" >
+                <form action="editReservation.php" method="POST">
+                    <b>Retrieve a Reservation</b><br>
+                    <p></p>
+                    <label>First Name</label> <br>
+                    <input id="firstName" name="firstName" type="text" value=""><br>
+                    <p></p>
+                    <label>Last Name</label> <br>
+                    <input id="lastName" name="lastName" type="text" value=""><br>
+                    <p></p>
+                    <label>Reservation Number</label> <br>
+                    <input id="reservationID" name="reservationID" type="text" value=""><br>
+                    <p></p>
+                    <input id="find" type="submit" value="RETRIEVE RESERVATION" class="blueButton">
                 </form>
             </div>
             <div id="searchResult">

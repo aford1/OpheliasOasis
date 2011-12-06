@@ -1,7 +1,22 @@
-<?PHP
+<?php
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 session_start();
-$_SESSION['reservationType'] = "conventional";
+include('configLocalDB.php');
+include('functions.php');
+
+$arrivalDate = $_SESSION['arrivalDate'];
+$departureDate = $_SESSION['departureDate'];
+
+$arrivalDate = convertDateReverse($arrivalDate);
+$departureDate = convertDateReverse($departureDate);
+
+$_SESSION['reservationType']="60special";
 ?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -36,7 +51,7 @@ $_SESSION['reservationType'] = "conventional";
                             if(result){
                                 $("#reserveForm").children().remove();
                                 $("#reserveForm").html(result);
-                                
+                                $("#reservationInfo").html("");
                             }
                             else
                                 alert("Error submitting form");                              
@@ -60,8 +75,20 @@ $_SESSION['reservationType'] = "conventional";
                 <li><a href="index.html"">Contact</a></li>
                 <li><a href="index.html"">About</a></li>
             </ul>
-
-
+            <div id="reservationInfo">
+            <h3>Reservation Information</h3>
+            <table>
+                <tr>
+                    <td>Reservation Type:</td><td>60 day advance</td>
+                </tr>
+                <tr>
+                    <td>Check In:</td><td><?PHP echo $arrivalDate; ?></td>
+                </tr>
+                <tr>
+                    <td>Check Out:</td><td><?PHP echo $departureDate; ?></td>
+                </tr>  
+            </table>
+            </div>
             <div id ="reserveForm">
                 <h3>Contact Information</h3>
                 <form>
@@ -134,8 +161,8 @@ $_SESSION['reservationType'] = "conventional";
                         </tr>
 
                         <tr> <td></br></td></tr>
- 
-                 
+
+
 
                         <tr>
                             <td><input type="button" value="Continue" class="reserveButton" id="submitReservation"></td>
